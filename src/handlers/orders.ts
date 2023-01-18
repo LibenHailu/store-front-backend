@@ -1,6 +1,6 @@
 import { Order, OrderStore } from "../models/order";
 import express, { Request, Response } from "express";
-
+import { auth } from "../middleware/auth";
 const store = new OrderStore();
 
 const index = async (_req: Request, res: Response) => {
@@ -10,6 +10,12 @@ const index = async (_req: Request, res: Response) => {
 
 const show = async (req: Request, res: Response) => {
   const order = await store.show(req.params.id);
+  res.json(order);
+};
+
+const showByUserID = async (req: Request, res: Response) => {
+  // @ts-ignore
+  const order = await store.showByUserID(req.user.id);
   res.json(order);
 };
 
@@ -63,6 +69,7 @@ const destory = async (req: Request, res: Response) => {
 const order_routes = (app: express.Application) => {
   app.get("/orders", index);
   app.get("/orders/:id", show);
+  app.get("orders/me", auth, showByUserID);
   app.post("/orders", create);
   app.delete("/orders/:id", destory);
   app.put("/orders/:id", update);
