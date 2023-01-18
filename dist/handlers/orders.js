@@ -24,6 +24,20 @@ const create = async (req, res) => {
         res.json(err);
     }
 };
+const update = async (req, res) => {
+    try {
+        const order = {
+            status: req.body.status,
+            user_id: req.body.user_id,
+        };
+        const updatedOrder = await store.update(req.params.id, order);
+        res.json(updatedOrder);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+};
 const addProduct = async (req, res) => {
     const orderId = req.params.id;
     const productId = req.body.productId;
@@ -46,6 +60,7 @@ const order_routes = (app) => {
     app.get("/orders/:id", show);
     app.post("/orders", create);
     app.delete("/orders/:id", destory);
+    app.put("/orders/:id", update);
     app.post("/orders/:id/products", addProduct);
 };
 exports.default = order_routes;

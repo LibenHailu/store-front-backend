@@ -1,4 +1,6 @@
 import { OrderStore } from "../order";
+import { UserStore } from "../user";
+import { ProductStore } from "../product";
 
 const store = new OrderStore();
 describe("Order model", () => {
@@ -22,42 +24,65 @@ describe("Order model", () => {
     expect(store.delete).toBeDefined();
   });
 
-  it("create method should add an order", async () => {
-    const result = await store.create({
-      status: "open",
-      user_id: 1,
+  describe("CRUD Order methods", () => {
+    const user = new UserStore();
+    const product = new ProductStore();
+
+    beforeAll(async () => {
+      await user.create({
+        firstname: "john",
+        lastname: "doe",
+        email: "john@email.com",
+        password: "john",
+      });
+      await product.create({
+        name: "car",
+        price: 2000,
+        category: "luxury",
+      });
+    });
+    afterAll(async () => {
+      await user.delete("1");
+      await product.delete("1");
     });
 
-    expect(result).toEqual({
-      id: 1,
-      status: "open",
-      user_id: 1,
-    });
-  });
-
-  it("Show method should return the order with it's id", async () => {
-    const result = await store.show("1");
-    expect(result).toEqual({
-      id: 1,
-      status: "open",
-      user_id: 1,
-    });
-  });
-
-  it("index method should return a list of orders", async () => {
-    const result = await store.index();
-    expect(result).toEqual([
-      {
+    it("create method should add an order", async () => {
+      const result = await store.create({
+        status: "open",
+        user_id: 1,
+      });
+      expect(result).toEqual({
         id: 1,
         status: "open",
         user_id: 1,
-      },
-    ]);
-  });
+      });
+    });
 
-  it("delete method should remove an order", async () => {
-    store.delete("1");
-    const result = await store.index();
-    expect(result).toEqual([]);
+    it("Show method should return the order with it's id", async () => {
+      const result = await store.show("1");
+      expect(result).toEqual({
+        id: 1,
+        status: "open",
+        user_id: 1,
+      });
+    });
+
+    it("index method should return a list of orders", async () => {
+      const result = await store.index();
+      expect(result).toEqual([
+        {
+          id: 1,
+          status: "open",
+          user_id: 1,
+        },
+      ]);
+
+    });
+
+    it("delete method should remove an order", async () => {
+      await store.delete("1");
+      const result = await store.index();
+      expect(result).toEqual([]);
+    });
   });
 });

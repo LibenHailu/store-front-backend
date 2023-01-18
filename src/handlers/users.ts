@@ -12,6 +12,7 @@ const create = async (req: Request, res: Response) => {
     email: req.body.email,
     password: req.body.password,
   };
+
   try {
     const newUser = await store.create(user);
     // @ts-ignore

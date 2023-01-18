@@ -4,7 +4,7 @@ import { User } from "../models/user";
 import dotenv from "dotenv";
 
 dotenv.config();
-const auth = (req: Request, res: Response, next: NextFunction) => {
+export const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorizationHeader = req.headers.authorization as string;
     const token = authorizationHeader.split(" ")[1];
@@ -18,5 +18,3 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 };
-
-export default auth;

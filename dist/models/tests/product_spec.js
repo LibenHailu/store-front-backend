@@ -52,7 +52,7 @@ describe("Product model", () => {
         ]);
     });
     it("delete method should remove a product", async () => {
-        store.delete("1");
+        await store.delete("1");
         const result = await store.index();
         expect(result).toEqual([]);
     });
