@@ -67,13 +67,13 @@ const destory = async (req: Request, res: Response) => {
 };
 
 const order_routes = (app: express.Application) => {
-  app.get("/orders", index);
-  app.get("/orders/:id", show);
+  app.get("/orders", auth, index);
+  app.get("/orders/:id", auth, show);
   app.get("orders/me", auth, showByUserID);
-  app.post("/orders", create);
-  app.delete("/orders/:id", destory);
-  app.put("/orders/:id", update);
-  app.post("/orders/:id/products", addProduct);
+  app.post("/orders", auth, create);
+  app.delete("/orders/:id", auth, destory);
+  app.put("/orders/:id", auth, update);
+  app.post("/orders/:id/products", auth, addProduct);
 };
 
 export default order_routes;
