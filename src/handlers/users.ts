@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { UserStore, User } from "../models/user";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { auth } from "../middleware/auth";
 
 dotenv.config();
 const store = new UserStore();
@@ -39,9 +40,23 @@ const authenticate = async (req: Request, res: Response) => {
   }
 };
 
+const show = async (req: Request, res: Response) => {
+  // @ts-ignore
+  const user = await store.show(req.user.id);
+  res.json(user);
+};
+
+const destory = async (req: Request, res: Response) => {
+  // @ts-ignore
+  const deleted = await store.delete(req.user.id);
+  res.json(deleted);
+};
+
 const user_routes = (app: express.Application) => {
   app.post("/users", create);
   app.post("/users/signin", authenticate);
+  app.get("/users", auth, show);
+  app.delete("/users", auth, destory);
 };
 
 export default user_routes;

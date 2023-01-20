@@ -1,5 +1,6 @@
 import { Product, ProductStore } from "../models/product";
 import express, { Request, Response } from "express";
+import { auth } from "../middleware/auth";
 
 const store = new ProductStore();
 
@@ -51,9 +52,9 @@ const destory = async (req: Request, res: Response) => {
 const product_routes = (app: express.Application) => {
   app.get("/products", index);
   app.get("/products/:id", show);
-  app.post("/products", create);
-  app.put("/products/:id", update);
-  app.delete("/products/:id", destory);
+  app.post("/products", auth, create);
+  app.put("/products/:id", auth, update);
+  app.delete("/products/:id", auth, destory);
 };
 
 export default product_routes;
