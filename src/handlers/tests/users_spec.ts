@@ -61,7 +61,7 @@ describe("Test users endpoint responses", () => {
 
   it("shoudl get user the index endpoint", (done) => {
     request
-      .get("/users")
+      .get("/users/1")
       .set("Authorization", "Bearer " + token)
       .then((res) => {
         expect(res.status).toBe(200);

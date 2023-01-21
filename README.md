@@ -19,6 +19,10 @@ TOKEN_SECRET=mySecretKey
 SALT=mySaltKey
 ```
 
+## Ports
+
+The server runs on localhost port `3000` and the database runs on localhost port `5432`
+
 ## Database setup
 
 ```
@@ -41,12 +45,13 @@ $ npm install
 $ db-migrate up -e dev
 $ npm run watch
 ```
-![image](https://user-images.githubusercontent.com/51024415/213869095-19944286-6a61-4e04-82c2-8bf0274efc1a.png)
 
+![image](https://user-images.githubusercontent.com/51024415/213869095-19944286-6a61-4e04-82c2-8bf0274efc1a.png)
 
 ## Running Tests
 
 ```
 $ ENV=test npm run test
 ```
+
 ![image](https://user-images.githubusercontent.com/51024415/213869153-402a80e1-7ea0-441d-810c-83743749d7de.png)
