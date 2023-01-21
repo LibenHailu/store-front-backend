@@ -5,8 +5,6 @@
   "main": "server.ts",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "create-dev-db": "db-migrate db:create store_front_dev && db-migrate up -e dev",
-    "create-test-db": "db-migrate db:create store_front_test",
     "reset-test-db": "db-migrate reset -e test",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "ENV=test &&  db-migrate --env test up && jasmine-ts --random=false  && db-migrate reset --env test",
