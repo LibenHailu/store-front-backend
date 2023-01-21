@@ -40,22 +40,61 @@ const authenticate = async (req: Request, res: Response) => {
   }
 };
 
+const index = async (_req: Request, res: Response) => {
+  try {
+    const users = await store.index();
+    res.json(users);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
+};
+
 const show = async (req: Request, res: Response) => {
-  // @ts-ignore
-  const user = await store.show(req.user.id);
-  res.json(user);
+  try {
+    // @ts-ignore
+    const user = await store.show(req.params.id);
+    res.json(user);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
 };
 
 const destory = async (req: Request, res: Response) => {
-  // @ts-ignore
-  const deleted = await store.delete(req.user.id);
-  res.json(deleted);
+  try {
+    // @ts-ignore
+    const deleted = await store.delete(req.user.id);
+    res.json(deleted);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
+};
+
+const update = async (req: Request, res: Response) => {
+  try {
+    const user: User = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.password,
+    };
+    // @ts-ignore
+    const updated = await store.update(req.user.id, user);
+    res.json(updated);
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
 };
 
 const user_routes = (app: express.Application) => {
   app.post("/users", create);
   app.post("/users/signin", authenticate);
-  app.get("/users", auth, show);
+  app.get("/users/:id", auth, show);
+  app.get("/users", auth, index);
+  app.put("/users", auth, update);
   app.delete("/users", auth, destory);
 };
 

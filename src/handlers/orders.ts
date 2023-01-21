@@ -4,19 +4,34 @@ import { auth } from "../middleware/auth";
 const store = new OrderStore();
 
 const index = async (_req: Request, res: Response) => {
-  const orders = await store.index();
-  res.json(orders);
+  try {
+    const orders = await store.index();
+    res.json(orders);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
 };
 
 const show = async (req: Request, res: Response) => {
-  const order = await store.show(req.params.id);
-  res.json(order);
+  try {
+    const order = await store.show(req.params.id);
+    res.json(order);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
 };
 
 const showByUserID = async (req: Request, res: Response) => {
-  // @ts-ignore
-  const order = await store.showByUserID(req.user.id);
-  res.json(order);
+  try {
+    // @ts-ignore
+    const order = await store.showByUserID(req.user.id);
+    res.json(order);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
 };
 
 const create = async (req: Request, res: Response) => {
@@ -62,8 +77,13 @@ const addProduct = async (req: Request, res: Response) => {
 };
 
 const destory = async (req: Request, res: Response) => {
-  const deleted = await store.delete(req.params.id);
-  res.json(deleted);
+  try {
+    const deleted = await store.delete(req.params.id);
+    res.json(deleted);
+  } catch (error) {
+    res.status(401);
+    res.json({ error });
+  }
 };
 
 const order_routes = (app: express.Application) => {
