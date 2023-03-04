@@ -40,38 +40,62 @@ var order_1 = require("../models/order");
 var auth_1 = require("../middleware/auth");
 var store = new order_1.OrderStore();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var orders;
+    var orders, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.index()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.index()];
             case 1:
                 orders = _a.sent();
                 res.json(orders);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(401);
+                res.json({ error: error_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var order;
+    var order, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.show(req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.show(req.params.id)];
             case 1:
                 order = _a.sent();
                 res.json(order);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.status(401);
+                res.json({ error: error_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 var showByUserID = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var order;
+    var order, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.showByUserID(req.user.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.showByUserID(req.user.id)];
             case 1:
                 order = _a.sent();
                 res.json(order);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.status(401);
+                res.json({ error: error_3 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
@@ -149,14 +173,22 @@ var addProduct = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 var destory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store["delete"](req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store["delete"](req.params.id)];
             case 1:
                 deleted = _a.sent();
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                res.status(401);
+                res.json({ error: error_4 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

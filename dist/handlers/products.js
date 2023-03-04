@@ -40,26 +40,42 @@ var product_1 = require("../models/product");
 var auth_1 = require("../middleware/auth");
 var store = new product_1.ProductStore();
 var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var products;
+    var products, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.index()];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.index()];
             case 1:
                 products = _a.sent();
                 res.json(products);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(401);
+                res.json({ error: error_1 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var product;
+    var product, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.show(req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.show(req.params.id)];
             case 1:
                 product = _a.sent();
                 res.json(product);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.status(401);
+                res.json({ error: error_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
@@ -72,6 +88,8 @@ var create = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 product = {
                     name: req.body.name,
                     price: req.body.price,
+                    url: req.body.url,
+                    description: req.body.description,
                     category: req.body.category
                 };
                 return [4 /*yield*/, store.create(product)];
@@ -97,6 +115,8 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
                 product = {
                     name: req.body.name,
                     price: req.body.price,
+                    url: req.body.url,
+                    description: req.body.description,
                     category: req.body.category
                 };
                 return [4 /*yield*/, store.update(req.params.id, product)];
@@ -114,14 +134,22 @@ var update = function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 var destory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store["delete"](req.params.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store["delete"](req.params.id)];
             case 1:
                 deleted = _a.sent();
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.status(401);
+                res.json({ error: error_3 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };

@@ -99,34 +99,98 @@ var authenticate = function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); };
-var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
+var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store.show(req.user.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.index()];
+            case 1:
+                users = _a.sent();
+                res.json(users);
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                res.status(401);
+                res.json({ error: error_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store.show(req.params.id)];
             case 1:
                 user = _a.sent();
                 res.json(user);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                res.status(401);
+                res.json({ error: error_3 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 var destory = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var deleted;
+    var deleted, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, store["delete"](req.user.id)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, store["delete"](req.user.id)];
             case 1:
                 deleted = _a.sent();
                 res.json(deleted);
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                res.status(401);
+                res.json({ error: error_4 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var update = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, updated, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                user = {
+                    firstname: req.body.firstname,
+                    lastname: req.body.lastname,
+                    email: req.body.email,
+                    password: req.body.password
+                };
+                return [4 /*yield*/, store.update(req.user.id, user)];
+            case 1:
+                updated = _a.sent();
+                res.json(updated);
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.status(400);
+                res.json(err_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 var user_routes = function (app) {
     app.post("/users", create);
     app.post("/users/signin", authenticate);
-    app.get("/users", auth_1.auth, show);
+    app.get("/users/:id", auth_1.auth, show);
+    app.get("/users", auth_1.auth, index);
+    app.put("/users", auth_1.auth, update);
     app["delete"]("/users", auth_1.auth, destory);
 };
 exports["default"] = user_routes;

@@ -103,8 +103,14 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *";
-                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.category])];
+                        sql = "INSERT INTO products (name, price, url, category,description) VALUES($1, $2, $3, $4,$5) RETURNING *";
+                        return [4 /*yield*/, conn.query(sql, [
+                                p.name,
+                                p.price,
+                                p.url,
+                                p.category,
+                                p.description,
+                            ])];
                     case 2:
                         result = _a.sent();
                         product = result.rows[0];
@@ -128,8 +134,14 @@ var ProductStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = "UPDATE products SET name = $1, price = $2, category = $3 WHERE id = $4 RETURNING *";
-                        return [4 /*yield*/, conn.query(sql, [p.name, p.price, p.category, id])];
+                        sql = "UPDATE products SET name = $1, price = $2, url = $3, category = $4 WHERE id = $5 RETURNING *";
+                        return [4 /*yield*/, conn.query(sql, [
+                                p.name,
+                                p.price,
+                                p.url,
+                                p.category,
+                                id,
+                            ])];
                     case 2:
                         result = _a.sent();
                         updatedProduct = result.rows[0];

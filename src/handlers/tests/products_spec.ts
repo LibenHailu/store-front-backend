@@ -21,7 +21,9 @@ describe("Test products endpoint responses", () => {
         id: 1,
         name: "car",
         price: 2000,
+        url: "image.com",
         category: "luxury",
+        description: "luxury",
       })
     );
     spyOn(ProductStore.prototype, "index").and.returnValue(
@@ -30,7 +32,9 @@ describe("Test products endpoint responses", () => {
           id: 1,
           name: "car",
           price: 2000,
+          url: "image.com",
           category: "luxury",
+          description: "luxury",
         },
       ])
     );
@@ -39,7 +43,9 @@ describe("Test products endpoint responses", () => {
         id: 1,
         name: "car",
         price: 2000,
+        url: "image.com",
         category: "luxury",
+        description: "luxury",
       })
     );
     spyOn(ProductStore.prototype, "delete").and.returnValue(
@@ -47,7 +53,9 @@ describe("Test products endpoint responses", () => {
         id: 1,
         name: "car",
         price: 2000,
+        url: "image.com",
         category: "luxury",
+        description: "luxury",
       })
     );
   });
@@ -76,6 +84,7 @@ describe("Test products endpoint responses", () => {
       id: 1,
       name: "car",
       price: 2000,
+      url: "image.com",
       category: "luxury",
     });
     done();
@@ -89,6 +98,7 @@ describe("Test products endpoint responses", () => {
         id: 1,
         name: "car",
         price: 2000,
+        url: "image.com",
         category: "luxury",
       },
     ]);
@@ -102,6 +112,7 @@ describe("Test products endpoint responses", () => {
       id: 1,
       name: "car",
       price: 2000,
+      url: "image.com",
       category: "luxury",
     });
     done();
@@ -117,6 +128,7 @@ describe("Test products endpoint responses", () => {
       id: 1,
       name: "car",
       price: 2000,
+      url: "image.com",
       category: "luxury",
     });
     done();

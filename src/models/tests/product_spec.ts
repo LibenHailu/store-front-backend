@@ -26,6 +26,8 @@ describe("Product model", () => {
     const result = await store.create({
       name: "car",
       price: 2000,
+      url: "image.com",
+      description: "luxury",
       category: "luxury",
     });
 
@@ -33,6 +35,8 @@ describe("Product model", () => {
       id: 2,
       name: "car",
       price: 2000,
+      url: "image.com",
+      description: "luxury",
       category: "luxury",
     });
   });
@@ -43,6 +47,8 @@ describe("Product model", () => {
       id: 2,
       name: "car",
       price: 2000,
+      url: "image.com",
+      description: "luxury",
       category: "luxury",
     });
   });
@@ -54,6 +60,8 @@ describe("Product model", () => {
         id: 2,
         name: "car",
         price: 2000,
+        url: "image.com",
+        description: "luxury",
         category: "luxury",
       },
     ]);
@@ -65,6 +73,8 @@ describe("Product model", () => {
       id: 2,
       name: "car",
       price: 2000,
+      url: "image.com",
+      description: "luxury",
       category: "luxury",
     });
   });
