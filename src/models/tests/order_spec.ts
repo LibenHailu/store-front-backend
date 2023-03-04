@@ -38,6 +38,8 @@ describe("Order model", () => {
       await product.create({
         name: "car",
         price: 2000,
+        url: "image.com",
+        description: "luxury",
         category: "luxury",
       });
     });
@@ -76,7 +78,6 @@ describe("Order model", () => {
           user_id: 1,
         },
       ]);
-
     });
 
     it("delete method should remove an order", async () => {

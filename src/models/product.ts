@@ -5,7 +5,9 @@ export type Product = {
   id?: Number;
   name: string;
   price: Number;
+  url: string;
   category: string;
+  description: string;
 };
 
 export class ProductStore {
@@ -40,8 +42,14 @@ export class ProductStore {
       // @ts-ignore
       const conn = await client.connect();
       const sql =
-        "INSERT INTO products (name, price, category) VALUES($1, $2, $3) RETURNING *";
-      const result = await conn.query(sql, [p.name, p.price, p.category]);
+        "INSERT INTO products (name, price, url, category,description) VALUES($1, $2, $3, $4,$5) RETURNING *";
+      const result = await conn.query(sql, [
+        p.name,
+        p.price,
+        p.url,
+        p.category,
+        p.description,
+      ]);
       const product = result.rows[0];
       conn.release();
       return product;
@@ -55,8 +63,14 @@ export class ProductStore {
       // @ts-ignore
       const conn = await client.connect();
       const sql =
-        "UPDATE products SET name = $1, price = $2, category = $3 WHERE id = $4 RETURNING *";
-      const result = await conn.query(sql, [p.name, p.price, p.category, id]);
+        "UPDATE products SET name = $1, price = $2, url = $3, category = $4 WHERE id = $5 RETURNING *";
+      const result = await conn.query(sql, [
+        p.name,
+        p.price,
+        p.url,
+        p.category,
+        id,
+      ]);
       const updatedProduct = result.rows[0];
       conn.release();
       return updatedProduct;

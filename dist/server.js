@@ -12,8 +12,7 @@ var users_1 = __importDefault(require("./handlers/users"));
 var app = (0, express_1["default"])();
 var address = "0.0.0.0:3000";
 var corsOptions = {
-    origin: "http://someotherdomin.com",
-    optionsSuccessStatus: 200
+    origin: "*"
 };
 app.use((0, cors_1["default"])(corsOptions));
 app.use(body_parser_1["default"].json());

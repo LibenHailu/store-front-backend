@@ -9,8 +9,8 @@ const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
 const corsOptions = {
-  origin: "http://someotherdomin.com",
-  optionsSuccessStatus: 200,
+  origin: "*",
+  // optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
